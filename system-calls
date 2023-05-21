@@ -1,0 +1,66 @@
+Title: Introduction to System Calls
+
+Abstract:
+System calls are fundamental interfaces provided by the operating system that allow user-level programs to interact with the underlying system resources and perform various operations.
+This assignment aims to introduce students to the concept of system calls and their significance in operating systems.
+The assignment covers the basics of system calls, common system calls in different operating systems, and their usage in practical scenarios.
+Additionally, it includes hands-on exercises to reinforce the understanding of system calls and their implementation.
+
+Assignment:
+
+Part 1: Understanding System Calls
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+
+int main() {
+    // Create a new directory
+    if (mkdir("my_directory", 0777) == -1) {
+        perror("mkdir");
+        return 1;
+    }
+    
+    printf("Directory created successfully.\n");
+    
+    // Change directory
+    if (chdir("my_directory") == -1) {
+        perror("chdir");
+        return 1;
+    }
+    
+    printf("Changed directory to 'my_directory'.\n");
+    
+    // List directory contents
+    if (system("ls -l") == -1) {
+        perror("system");
+        return 1;
+    }
+    
+    printf("Listed directory contents.\n");
+    
+    // Change back to parent directory
+    if (chdir("..") == -1) {
+        perror("chdir");
+        return 1;
+    }
+    
+    printf("Changed directory back to parent.\n");
+    
+    // Remove the directory
+    if (rmdir("my_directory") == -1) {
+        perror("rmdir");
+        return 1;
+    }
+    
+    printf("Directory removed successfully.\n");
+    
+    return 0;
+}
+
+Conclusion:
+In conclusion, this assignment provides students with a comprehensive understanding of system calls and their significance in operating systems.
+By completing the exercises, students will gain practical experience in utilizing system calls for various operations, such as process management,
+file handling, interprocess communication, and network programming. System call knowledge is essential for understanding how user-level programs interact with the operating system and for developing efficient and robust software.
